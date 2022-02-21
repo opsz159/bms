@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin.goods">
+	
+	<select id="selectNewGoodsList" resultType="GoodsDto" >
+		SELECT 
+	   			*
+	    FROM 
+				T_SHOPPING_GOODS 	            		
+        ORDER BY 
+          		GOODS_CREDATE DESC
+	</select>
+	
+	<insert id="insertNewGoods" parameterType="GoodsDto">
+		    INSERT INTO 
+		  			T_SHOPPING_GOODS (
+						GOODS_TITLE,
+					    GOODS_WRITER,
+						GOODS_PRICE,
+						GOODS_PUBLISHER,
+						GOODS_SORT,
+						GOODS_SALES_PRICE,
+						GOODS_POINT,
+						GOODS_PUBLISHED_DATE ,
+						GOODS_TOTAL_PAGE,
+						GOODS_ISBN,
+						GOODS_DELIVERY_PRICE,
+						GOODS_DELIVERY_DATE,
+						GOODS_STATUS,
+						GOODS_WRITER_INTRO,
+						GOODS_CONTENTS_ORDER,
+						GOODS_INTRO,
+						GOODS_PUBLISHER_COMMENT,
+						GOODS_RECOMMENDATION,
+						GOODS_FILE_NAME,
+						GOODS_CREDATE 					  			
+		  			)
+		    VALUES (
+			       #{goodsTitle},
+			       #{goodsWriter},
+			       #{goodsPrice},
+			       #{goodsPublisher},
+			       #{goodsSort},
+			       #{goodsSalesPrice},
+			       #{goodsPoint},
+			       #{goodsPublishedDate},
+			       #{goodsTotalPage},
+			       #{goodsIsbn},
+			       #{goodsDeliveryPrice},
+			       #{goodsDeliveryDate},
+			       #{goodsStatus},
+			       #{goodsWriterIntro},
+		  	   	   #{goodsIntro},
+			       #{goodsContentsOrder},
+			       #{goodsPublisherComment},
+			       #{goodsRecommendation},	
+			       #{goodsFileName},
+			       NOW()
+ 			 )
+	</insert> 
+	
+	<select id="selectGoodsDetail" parameterType="int" resultType="GoodsDto">
+	    SELECT 
+	    		*
+	    FROM 
+	    		T_SHOPPING_GOODS  
+        WHERE 
+        		GOODS_ID = #{goodsId}
+	</select>
+	
+	<update id="updateGoodsInfo" parameterType="hashmap" >
+	   UPDATE 
+	   			T_SHOPPING_GOODS
+	   <set> 
+	      <if test='goodsSort != null and goodsSort != ""'>
+	        GOODS_SORT = #{goodsSort},
+	      </if>
+	      <if test='goodsTitle != null and goodsTitle != ""'>
+	        GOODS_TITLE = #{goodsTitle},
+	      </if>
+	      <if test='goodsWriter != null and goodsWriter != ""'>
+	        GOODS_WRITER = #{goodsWriter},
+	      </if>
+	      <if test='goodsPublisher != null and goodsPublisher != ""'>
+	        GOODS_PUBLISHER = #{goodsPublisher},
+	      </if>
+	      <if test='goodsPrice != null and goodsPrice != ""'>
+	        goods_price = #{goodsPrice},
+	      </if>
+	      <if test='goodsPublishedDate != null and goodsPublishedDate != ""'>
+	        GOODS_PUBLISHED_DATE = #{goodsPublishedDate},
+	      </if>
+	      <if test='goodsSalesPrice != null and goodsSalesPrice != ""'>
+	        GOODS_SALES_PRICE = #{goodsSalesPrice},
+	      </if>
+	      <if test='goodsPoint != null and goodsPoint != ""'>
+	        GOODS_POINT = #{goodsPoint},
+	      </if>
+	      <if test='goodsTotalPage != null and goodsTotalPage != ""'>
+	        GOODS_TOTAL_PAGE = #{goodsTotalPage},
+	      </if>
+	      <if test='goodsIsbn != null and goodsIsbn != ""'>
+	        GOODS_ISBN = #{goodsIsbn},
+	      </if>
+	      <if test='goodsDeliveryPrice != null and goodsDeliveryPrice != ""'>
+	        GOODS_DELIVERY_PRICE = #{goodsDeliveryPrice},
+	      </if>
+	      <if test='goodsDeliveryDate != null and goodsDeliveryDate != ""'>
+	        GOODS_DELIVERY_DATE = #{goodsDeliveryDate},
+	      </if>
+	      <if test='goodsStatus != null and goodsStatus != ""'>
+	        GOODS_STATUS = #{goodsStatus},
+	      </if>
+	      <if test='goodsWriterIntro != null and goodsWriterIntro != ""'>
+	        GOODS_WRITER_INTRO = #{goodsWriterIntro},
+	      </if>
+	      <if test='goodsIntro != null and goodsIntro != ""'>
+	        GOODS_INTRO = #{goodsIntro},
+	      </if>
+	      <if test='goodsPublisherComment != null and goodsPublisherComment != ""'>
+	        GOODS_PUBLISHER_COMMENT = #{goodsPublisherComment},
+	      </if>
+	      <if test='goodsRecommendation != null and goodsRecommendation != ""'>
+	        GOODS_RECOMMENDATION = #{goodsRecommendation},
+	      </if>
+	      <if test='goodsContentsOrder != null and goodsContentsOrder != ""'>
+	        GOODS_CONTENTS_ORDER = #{goodsContentsOrder},
+      	  </if>
+	      <if test='goodsFileName != null and goodsFileName != ""'>
+	        GOODS_FILE_NAME = #{goodsFileName},
+      	  </if>
+	    </set>
+		WHERE 
+				GOODS_ID = #{goodsId}
+	</update>	
+		
+</mapper>
