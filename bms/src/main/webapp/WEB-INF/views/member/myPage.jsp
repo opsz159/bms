@@ -160,7 +160,7 @@
 </script>
 </head>
 <body>
-	<h3>${memberDto.memberId }님의 회원정보</h3>
+	<h3>${memberPage.memberId }님의 회원정보</h3>
 	<form name="frm_mod_member">	
 		<table class="table table-bordered table-hover">
 				<tr>
@@ -367,7 +367,7 @@
 				<tr>
 					<td colspan="3" align="center">
 						<input type="button" value="메인으로" class="btn btn-outline-primary btn-sm" onclick="location.href='${contextPath}/main/main'"/>
-						<input type="button" value="회원탈퇴" class="btn btn-outline-primary btn-sm"/>
+						<input type="button" value="회원탈퇴" class="btn btn-outline-primary btn-sm" onclick="location.href='${contextPath}/member/deleteMember'"/>
 					</td>
 				</tr>
 		</table>

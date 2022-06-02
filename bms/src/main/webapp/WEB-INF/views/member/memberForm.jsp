@@ -92,6 +92,7 @@
 		
 	}
 	
+	
 	$().ready(function() {
 
 		$("#select_email").change(function() {
@@ -157,7 +158,7 @@ td:first-child {
 			</tr>
 			<tr>
 				<td><label class="small mb-1">비밀번호 확인</label></td>
-				<td><input class="form-control" id="repw" name="memberPw"
+				<td><input class="form-control" id="repw" name="memberPwCheck"
 					type="password" placeholder="비밀번호를 입력하세요." /></td>
 			</tr>
 			<tr>

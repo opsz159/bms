@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bms.order.dto.OrderDto;
 import com.bms.order.service.OrderService;
+import com.sun.org.apache.xpath.internal.operations.Or;
 
 @Controller
 @RequestMapping("/order")
@@ -48,14 +50,22 @@ public class OrderController {
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/orderList" , method=RequestMethod.GET)
-	public ModelAndView	orderList(HttpServletRequest request) throws Exception {
-		
+	@RequestMapping(value="/orderMain" , method=RequestMethod.GET)
+	public ModelAndView	orderMain(HttpServletRequest request) throws Exception {
+
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/order/orderList");
+		mv.setViewName("/order/orderMain");
+		
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("memberInfo");
+		System.out.println("id : " + memberId);
+		List<OrderDto> orderdto = orderService.getOrderMemberInfo(memberId);
+		
+		mv.addObject("orderDto" , orderdto);
+		System.out.println("22222222222 : " + orderdto);
 		
 		List<OrderDto> orderList = orderService.getOrderList();
-		mv.addObject("orderList" , orderList);
+		mv.addObject("orderList" , orderdto);
 		
 		return mv;
 	}
@@ -65,7 +75,8 @@ public class OrderController {
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/order/orderInfo");
-		mv.addObject("orderMap", orderService.orderInfo(orderId));
+		
+		mv.addObject("order", orderService.orderInfo(orderId));
 		
 		return mv;
 		

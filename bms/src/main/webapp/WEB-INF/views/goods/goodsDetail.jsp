@@ -25,8 +25,9 @@
 		} 
 		
 		location.href = "${contextPath}/order/orderEachGoods?goodsId=" + goodsId + "&orderGoodsQty=" + orderGoodsQty;
-		
-	}	
+	}
+	
+	
 </script>
 </head>
 <body>
@@ -52,7 +53,7 @@
 				<tr class="dot_line">
 					<td class="fixed">판매가</td>
 					<td class="active">
-						<fmt:formatNumber value="${goods.goodsPrice * 0.9}" type="number" var="discountedPrice" /> ${discountedPrice}원(10%할인)
+						<fmt:formatNumber value="${goods.goodsSalesPrice}" type="number" var="discountedPrice" /> ${discountedPrice}원
 				    </td>
 				</tr>
 				<tr>

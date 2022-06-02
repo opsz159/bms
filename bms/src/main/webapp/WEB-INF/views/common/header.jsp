@@ -23,11 +23,11 @@
 			     <c:when test="${isLogOn == true and not empty memberInfo }">
 				   <li>${sessionScope.memberInfo}님</li>
 				   <li><a href="${contextPath}/member/logout">로그아웃</a></li>
-				   <li><a href="${contextPath}/member/myPage">회원정보</a></li>
 				 </c:when>
 				 <c:otherwise>
 				   <li><a href="${contextPath}/member/loginForm">로그인</a></li>
 				   <li><a href="${contextPath}/member/memberForm">회원가입</a></li> 
+				   <li><a href="${contextPath}/member/findIdPage">아이디찾기</a></li> 
 				 </c:otherwise>
 			</c:choose>
 		</ul>

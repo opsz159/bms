@@ -22,20 +22,20 @@
 			</li>
 			<br><br><br>
 		</c:when>
-		<c:when test="${sideMenu == 'user'}">
+		<c:when test="${user == 'memberInfo'}">
 		   <li>
-				<h3>마이페이지</h3>
+				<h3>마이페이지 </h3>
 				<ul>
-					<li><a href="${contextPath}/order/orderDetail">배송조회</a></li>
+					<li><a href="${contextPath}/member/showOneMember">회원정보</a></li>
+					<li><a href="${contextPath}/order/orderMain">주문배송</a></li>
 				</ul>
 			</li>
 			<br><br><br>
 		</c:when>
 		<c:otherwise>
 			<li>
-				<h3>목록 보기</h3>
+				<h3>로그인후 사용가능</h3>
 				<ul>
-					<li>로그인후 이용</li>
 				</ul>
 			</li>
 			<br><br><br>
@@ -57,7 +57,7 @@
 	<div class="clear"></div>
 	
 	<div id="banner">
-		<a href="#"><img width="190" height="163" src="${contextPath}/resources/image/n-pay.jpg"> </a>
+		<a href="https://www.unicef.or.kr/event/for-everychild-promise2-1/?trackcode=n_ro_dad_promise2&utm_source=naver&utm_medium=cpm&utm_content=%EB%A1%A4%EB%A7%81%EB%B3%B4%EB%93%9C_PROMISE2_P%EB%A7%818%EC%98%B7%ED%95%80%EC%9D%B4%EC%9C%A0&utm_campaign=promise2&mac_ad_key=2157838943"><img width="190" height="163" src="${contextPath}/resources/image/unicef.jpg"> </a>
 	</div>
 	<div class="clear"></div>
 	

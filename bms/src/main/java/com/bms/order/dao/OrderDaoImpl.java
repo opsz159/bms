@@ -22,6 +22,11 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
+	public List<OrderDto> selectOrderMemberInfo(String memberId) throws Exception {
+		return sqlSession.selectList("mapper.order.selectOrderMemberInfo" , memberId);
+	}
+	
+	@Override
 	public MemberDto selectOrdererInfo(String memberId) throws Exception {
 		return sqlSession.selectOne("mapper.order.selectOrdererInfo" , memberId);
 	}
@@ -36,8 +41,8 @@ public class OrderDaoImpl implements OrderDao {
 	}
 	
 	@Override
-	public Map<String,Object> selectOrderState(int orderId) throws Exception{
-		return sqlSession.selectOne("mapper.order.selectOrderState" , orderId);
+	public Map<String,Object> selectOrderInfo(int orderId) throws Exception{
+		return sqlSession.selectOne("mapper.order.selectOrderInfo" , orderId);
 	}
 }
 

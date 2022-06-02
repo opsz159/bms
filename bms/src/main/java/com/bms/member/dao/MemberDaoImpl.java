@@ -1,5 +1,6 @@
 package com.bms.member.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -39,5 +40,18 @@ public class MemberDaoImpl implements MemberDao{
 		sqlSession.update("mapper.member.updateMemberInfo" , memberMap);
 	}
 	
+	@Override
+	public void deleteMember(String memberId) throws Exception {
+		sqlSession.delete("mapper.member.deleteMember", memberId);
+	}
+
+	@Override
+	public List<MemberDto> findId(String memberName) throws Exception {
+		return sqlSession.selectList("mapper.member.findId" , memberName);
+	}
 	
+	@Override
+	public int findIdCheck(String memberName) throws Exception {
+		return sqlSession.selectOne("mapper.member.findIdCheck" , memberName);
+	}
 }

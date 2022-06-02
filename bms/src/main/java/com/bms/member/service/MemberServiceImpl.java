@@ -1,6 +1,10 @@
 package com.bms.member.service;
 
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,9 +33,7 @@ public class MemberServiceImpl implements MemberService {
 				return memberDto;
 			}
 		}
-		
 		return null;
-		
 	}
 	
 	
@@ -59,4 +61,28 @@ public class MemberServiceImpl implements MemberService {
 		 memberDao.updateMemberInfo(memberMap);
 	}
 	
+	@Override
+	public boolean deleteMember(Map<String,String> loginMap) throws Exception{
+		
+		System.out.println(loginMap);
+		MemberDto memberDto = memberDao.login(loginMap);
+		System.out.println("sv : " + memberDto);
+		if (memberDto != null) {
+			if (passwordEncoder.matches(loginMap.get("memberPw") , memberDto.getMemberPw())) {
+				memberDao.deleteMember(memberDto.getMemberId());
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public List<MemberDto> findId(String memberName) throws Exception {
+		return memberDao.findId(memberName);
+	}
+	
+	@Override
+	public int findIdCheck(String memberName) throws Exception {
+		return memberDao.findIdCheck(memberName);
+	}
 }

@@ -19,6 +19,21 @@
          <put-attribute name="title" value="회원 정보 페이지" />
          <put-attribute name="body" value="/WEB-INF/views/member/myPage.jsp" />
       </definition>
+
+      <definition name="/member/deleteMember" extends="baseLayout">
+         <put-attribute name="title" value="회원 탈퇴 페이지" />
+         <put-attribute name="body" value="/WEB-INF/views/member/deleteMember.jsp" />
+      </definition>
+
+      <definition name="/member/findId" extends="baseLayout">
+         <put-attribute name="title" value="아이디 찾기 페이지" />
+         <put-attribute name="body" value="/WEB-INF/views/member/findId.jsp" />
+      </definition>
+
+      <definition name="/member/findIdPage" extends="baseLayout">
+         <put-attribute name="title" value="아이디 찾기 체크 페이지" />
+         <put-attribute name="body" value="/WEB-INF/views/member/findIdPage.jsp" />
+      </definition>
   
 </tiles-definitions>
 

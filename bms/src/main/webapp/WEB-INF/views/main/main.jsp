@@ -7,9 +7,9 @@
 
 	<div id="ad_main_banner">
 		<ul class="bjqs">
-		    <li><img width="775" height="145" src="${contextPath}/resources/image/main_banner01.jpg"></li>
-			<li><img width="775" height="145" src="${contextPath}/resources/image/main_banner02.jpg"></li>
-			<li><img width="775" height="145" src="${contextPath}/resources/image/main_banner03.jpg"></li>
+		    <li><img width="775" height="145" src="${contextPath}/resources/image/main_banner_01.jpg"></li>
+			<li><img width="775" height="145" src="${contextPath}/resources/image/main_banner_02.jpg"></li>
+			<li><img width="775" height="145" src="${contextPath}/resources/image/main_banner_03.jpg"></li>
 		</ul>
 	</div>
 	

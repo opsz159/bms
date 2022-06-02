@@ -10,9 +10,10 @@ import com.bms.order.dto.OrderDto;
 public interface OrderService {
 	
 	public void addNewOrder(OrderDto orderDto) throws Exception;
-	public MemberDto getOrdererInfo(String memberId) throws Exception;
+	public List<OrderDto> getOrderMemberInfo(String memberId) throws Exception;
 	public GoodsDto getGoodsInfo(int goodsId) throws Exception;
 	public List<OrderDto> getOrderList() throws Exception;
 	public Map<String, Object> orderInfo(int orderId) throws Exception;
+	public MemberDto getOrdererInfo(String memberId) throws Exception;
 	
 }

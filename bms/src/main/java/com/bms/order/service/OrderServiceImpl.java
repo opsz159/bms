@@ -22,6 +22,11 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public List<OrderDto> getOrderMemberInfo(String memberId) throws Exception {
+		return orderDao.selectOrderMemberInfo(memberId);
+	}
+	
+	@Override
 	public MemberDto getOrdererInfo(String memberId) throws Exception {
 		return orderDao.selectOrdererInfo(memberId);
 	}
@@ -38,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Override
 	public Map<String,Object> orderInfo(int orderId) throws Exception{
-		return orderDao.selectOrderState(orderId);
+		return orderDao.selectOrderInfo(orderId);
 	}
 	
 }

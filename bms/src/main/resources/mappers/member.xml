@@ -132,4 +132,28 @@
 				MEMBER_ID = #{memberId}
 	</update>
 	
+	<select id="deleteMember" parameterType="String">
+		DELETE FROM
+				T_SHOPPING_MEMBER
+		WHERE
+				MEMBER_ID = #{memberId}
+	</select>
+	
+	<select id="findId" resultType="MemberDto">
+		SELECT
+				* 
+		FROM 
+				T_SHOPPING_MEMBER 
+		WHERE 
+				MEMBER_NAME = #{memberName}
+	</select>
+
+	<select id="findIdCheck" resultType="int">
+		SELECT
+				COUNT(*) 
+		FROM 
+				T_SHOPPING_MEMBER 
+		WHERE 
+				MEMBER_NAME = #{memberName}
+	</select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.bms.member.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bms.member.dto.MemberDto;
 import com.bms.member.service.MemberService;
+import com.mysql.cj.Session;
+import com.sun.istack.internal.logging.Logger;
 
 @Controller
 @RequestMapping("/member")
@@ -37,13 +41,13 @@ public class MemberController {
 	public ModelAndView login(@RequestParam Map<String, String> loginMap, HttpServletRequest request) throws Exception {
 			
 		ModelAndView mv = new ModelAndView();
-		
 		MemberDto memberDto = memberService.login(loginMap);		
 		
 		if (memberDto != null) { 	
 			HttpSession session = request.getSession();		
 			session.setAttribute("isLogOn" , true);			
 			session.setAttribute("memberInfo" , memberDto.getMemberId());
+			session.setAttribute("user", "memberInfo");
 			session.setMaxInactiveInterval(60 * 30);
 			mv.setViewName("redirect:/main/main");	
 		}
@@ -112,20 +116,6 @@ public class MemberController {
 		return new ModelAndView("/member/memberForm");
 	}
 	
-	@RequestMapping(value = "/myPage" , method = RequestMethod.GET)
-	public ModelAndView myPage(HttpServletRequest request , Model model) throws Exception {
-		
-		ModelAndView mv = new ModelAndView();
-		
-		mv.setViewName("/member/myPage");
-		
-		HttpSession session = request.getSession();
-		mv.addObject("memberDto" , memberService.showOneMember((String)session.getAttribute("memberInfo")));
-		
-		return mv;
-		
-	}	
-	
 	@RequestMapping(value="/update" , method = RequestMethod.POST)
 	public ResponseEntity<Object> updateMemberInfo(@RequestParam("memberId") String memberId , 
 												@RequestParam("modType") String modType , 
@@ -185,13 +175,63 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/showOneMember" , method=RequestMethod.GET)
-	public ModelAndView showOneMember(@RequestParam("memberId") String memberId)  throws Exception{
+	public ModelAndView showOneMember(HttpServletRequest request)  throws Exception{
 		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/member/showOneMember");
-		mv.addObject("memberPage" , memberService.showOneMember(memberId));
+		mv.setViewName("/member/myPage");
+		
+		HttpSession session = request.getSession();
+		mv.addObject("memberPage", memberService.showOneMember((String)session.getAttribute("memberInfo")));
 		
 		return mv;
+	}
+	
+	@RequestMapping(value="/deleteMember" , method=RequestMethod.GET)
+	public ModelAndView deleteMember() {
+		return new ModelAndView("/member/deleteMember");
+	}
+	
+	@RequestMapping(value="/deleteMember" , method=RequestMethod.POST)
+	public ResponseEntity<String> deleteMember(@RequestParam Map<String, String> loginMap , HttpServletRequest request) throws Exception{
+		System.out.println("cttctctct : " + loginMap);
 		
+		String message = "";
+		
+		if (memberService.deleteMember(loginMap)) {
+			HttpSession session = request.getSession();
+			session.invalidate();
+			message  = "<script>";
+			message += "alert('탈퇴되었습니다.');";
+			message += "location.href='" + request.getContextPath() + "/main/main';";
+			message += "</script>";
+		}
+		else {
+			message  = "<script>";
+			message += "alert('비밀번호를 확인하세요.');";
+			message += "history.go(-1);";
+			message += "</script>";
+		}
+		HttpHeaders responseHeaders = new HttpHeaders();
+	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+	    
+	    return new ResponseEntity<String>(message, responseHeaders, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/findIdPage" , method=RequestMethod.GET)
+	public ModelAndView findIdPage() throws Exception {
+		return new ModelAndView("/member/findIdPage");
+	}
+	
+	@RequestMapping(value="/findId" , method=RequestMethod.POST)
+	public ModelAndView findId(MemberDto memberDto , Model model) throws Exception {
+		
+		if(memberService.findIdCheck(memberDto.getMemberName()) == 0) {
+			model.addAttribute("check" , "이름을 확인하세요.");
+			return new ModelAndView("/member/findIdPage");
+		}
+		else {
+			model.addAttribute("member" , memberService.findId(memberDto.getMemberName()));
+			return new ModelAndView("/member/findId");
+		}
 	}
 }

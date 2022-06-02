@@ -26,7 +26,7 @@
 					</td>
 					<td><h2><a href="${contextPath}/goods/goodsDetail?goodsId=${orderMap.goodsId }">${orderMap.goodsTitle}</a></h2></td>
 					<td><h2>${orderMap.orderGoodsQty}개</h2></td>
-					<td><h2>${orderMap.orderGoodsQty * orderMap.goodsSalesPrice}원 (10% 할인)</h2></td>
+					<td><h2>${orderMap.orderGoodsQty * orderMap.goodsSalesPrice}원</h2></td>
 					<td><h2>${orderMap.goodsDeliveryPrice}</h2></td>
 					<td><h2>${1500 * orderMap.orderGoodsQty }원</h2></td>
 					<td><h2>${orderMap.orderGoodsQty * orderMap.goodsSalesPrice + orderMap.goodsDeliveryPrice}원</h2></td>

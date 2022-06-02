@@ -2,6 +2,7 @@ package com.bms.goods.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,7 @@ public class GoodsController {
 	public ModelAndView goodsDetail(@RequestParam("goodsId") int goodsId) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
+		
 		mv.setViewName("/goods/goodsDetail");
 		mv.addObject("goods", goodsService.goodsDetail(goodsId));
 		
